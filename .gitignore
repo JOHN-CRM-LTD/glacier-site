@@ -1,0 +1,14 @@
+# OS / editor noise
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+.idea/
+.vscode/
+
+# local tooling
+.zcodeignore
+
+# local test servers
+node_modules/
+.npm/
