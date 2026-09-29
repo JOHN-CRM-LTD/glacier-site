@@ -623,8 +623,6 @@ body.is-loaded .hero__scroll { transform: translateX(-50%); }
 
 @keyframes marquee { to { transform: translateX(-50%); } }
 
-.marquee:hover .marquee__track { animation-play-state: paused; }
-
 /* ---------- stats ---------- */
 .stats {
   background: var(--navy-950);
