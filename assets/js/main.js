@@ -1,6 +1,6 @@
 /* ==========================================================================
    GLACIER SKATING — main.js
-   Snow, reveals, counters, tilt, cursor, parallax, open-status, form.
+   Snow, reveals, counters, tilt, cursor, parallax, open-status.
    ========================================================================== */
 (function () {
   "use strict";
@@ -89,6 +89,44 @@
     window.addEventListener("resize", function () {
       resize();
       spawn(W < 700 ? 45 : 90);
+    });
+  })();
+
+  /* ---------- marquee ---------- */
+  (function marquee() {
+    var track = document.querySelector(".marquee__track");
+    if (!track) return;
+
+    var PX_PER_SEC = 65.6; /* scroll speed; loop duration scales with group width */
+    var t;
+
+    /* The keyframe slides the track by exactly -50%, so each half of the
+       track must be at least as wide as the strip itself — any narrower and
+       blank space scrolls through at the loop point. Duplicate whole groups
+       until that holds, keeping both halves identical. */
+    function fill() {
+      var strip = track.parentElement;
+      var stripWidth = strip.getBoundingClientRect().width;
+
+      while (track.scrollWidth > 0 && track.scrollWidth / 2 < stripWidth) {
+        var groups = Array.prototype.slice.call(track.children);
+        groups.forEach(function (group) {
+          track.appendChild(group.cloneNode(true));
+        });
+      }
+
+      /* more groups = longer half, so stretch the duration to keep the
+         scroll speed the same at every viewport width */
+      track.style.animationDuration =
+        Math.round(track.scrollWidth / 2 / PX_PER_SEC) + "s";
+    }
+
+    fill();
+    window.addEventListener("load", fill);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fill);
+    window.addEventListener("resize", function () {
+      clearTimeout(t);
+      t = setTimeout(fill, 200);
     });
   })();
 
@@ -199,7 +237,7 @@
     });
   })();
 
-  /* ---------- opening hours / open-now status ---------- */
+  /* ---------- opening hours ---------- */
   (function openStatus() {
     /* minutes since midnight: [open, close] per weekday (0 = Sunday) */
     var hours = {
@@ -211,7 +249,6 @@
       5: [600, 1320],  /* 10:00 – 22:00 */
       6: [540, 1320]   /* 09:00 – 22:00 */
     };
-    var dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
     function fmt(mins) {
       var h = Math.floor(mins / 60), m = mins % 60;
@@ -220,26 +257,11 @@
 
     var now = new Date();
     var day = now.getDay();
-    var mins = now.getHours() * 60 + now.getMinutes();
     var today = hours[day];
 
     /* highlight today's row */
     var row = document.querySelector('#hoursTable tr[data-day="' + day + '"]');
     if (row) row.classList.add("is-today");
-
-    var chip = document.getElementById("openStatus");
-    var dot = chip ? chip.querySelector(".status-dot") : null;
-    var text = chip ? chip.querySelector(".status-text") : null;
-
-    var isOpen = mins >= today[0] && mins < today[1];
-
-    if (chip && dot && text) {
-      chip.classList.add(isOpen ? "is-open" : "is-closed");
-      dot.classList.add(isOpen ? "status-dot--open" : "status-dot--closed");
-      text.textContent = isOpen
-        ? "Open now — closes at " + fmt(today[1])
-        : "Closed — opens " + (mins < today[0] ? "today" : dayNames[(day + 1) % 7]) + " at " + fmt(hours[(day + 1) % 7][0]);
-    }
 
     /* mobile menu hours line */
     var menuHours = document.getElementById("menuHours");
@@ -294,7 +316,7 @@
         var py = (e.clientY - r.top) / r.height - 0.5;
         card.style.transform =
           "perspective(900px) rotateX(" + (-py * 6).toFixed(2) + "deg) rotateY(" +
-          (px * 8).toFixed(2) + "deg) translateY(-4px)";
+          (px * 8).toFixed(2) + "deg)";
       });
       card.addEventListener("mouseleave", function () {
         hover = false;
@@ -347,40 +369,5 @@
       ring.style.transform = "translate(" + (rx - size / 2) + "px," + (ry - size / 2) + "px)";
       requestAnimationFrame(loop);
     })();
-  })();
-
-  /* ---------- booking form (mailto) ---------- */
-  (function bookingForm() {
-    var form = document.getElementById("bookForm");
-    var note = document.getElementById("formNote");
-    if (!form) return;
-
-    /* min date = today */
-    var dateInput = document.getElementById("bfDate");
-    if (dateInput) {
-      dateInput.min = new Date().toISOString().split("T")[0];
-    }
-
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-      var data = new FormData(form);
-      var subject = "Booking request — " + data.get("session") + " (" + data.get("date") + ")";
-      var body =
-        "Hi Glacier Skating,\n\n" +
-        "I'd like to book a session.\n\n" +
-        "Name: " + data.get("name") + "\n" +
-        "Email: " + data.get("email") + "\n" +
-        "Session: " + data.get("session") + "\n" +
-        "Date: " + data.get("date") + "\n" +
-        "Skaters: " + data.get("guests") + "\n\n" +
-        "Thanks!";
-
-      window.location.href =
-        "mailto:hello@glacierskating.co.uk" +
-        "?subject=" + encodeURIComponent(subject) +
-        "&body=" + encodeURIComponent(body);
-
-      if (note) note.textContent = "Opening your email app to send the request…";
-    });
   })();
 })();
