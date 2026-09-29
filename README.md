@@ -49,4 +49,5 @@ All content is placeholder and lives in `index.html`:
 
 ## Deploying
 
-GitHub Pages: Settings → Pages → deploy from the `main` branch root. No build step needed.
+GitHub Pages deploys automatically on every push to `main` via the workflow in
+`.github/workflows/deploy.yml`. Live at: **https://john-crm-ltd.github.io/glacier-site/**
