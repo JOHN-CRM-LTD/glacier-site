@@ -40,6 +40,10 @@
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+  /* lock horizontal axis: bleed elements (tilted marquee, reveal offsets)
+     must be clipped, and mobile browsers ignore body-only overflow-x */
+  overflow-x: hidden;
+  overflow-x: clip; /* same at viewport level, but no scroll container */
 }
 
 body {
