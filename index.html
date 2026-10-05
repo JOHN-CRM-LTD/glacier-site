@@ -10,10 +10,29 @@
   <meta property="og:type" content="website">
   <meta property="og:image" content="assets/img/og-image.png">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+  <!-- JohnCRM's chat widget mounts inside a closed shadow root and ships no
+       public API. Flip that one root to open mode so site buttons (Ask about
+       coaching) can open the panel and pre-send a message. Must run before
+       chat.js loads. -->
+  <script>
+    (function () {
+      var native = Element.prototype.attachShadow;
+      if (!native) return;
+      Element.prototype.attachShadow = function (init) {
+        if (init && init.mode === "closed" &&
+            this.hasAttribute && this.hasAttribute("data-johncrm-chat")) {
+          init = { mode: "open", delegatesFocus: !!init.delegatesFocus };
+        }
+        return native.call(this, init);
+      };
+    })();
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css?v=7">
+  <link rel="stylesheet" href="assets/css/style.css?v=8">
 </head>
 <body id="top">
 
@@ -499,11 +518,10 @@
         </div>
 
         <div class="lessons__cta">
-          <a class="btn btn--dark" href="https://hkboss.com.hk/ai-cs.html">Book a course</a>
-          <a class="link-arrow link-arrow--sm" href="mailto:info@hkboss.com.hk">
+          <button class="btn btn--dark" type="button" id="askCoaching"
+            data-chat-message="Hi! I'd like to find out more about skating lessons and coaching at Glacier. Availability, coaches and prices.">
             Ask about coaching
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </a>
+          </button>
         </div>
       </div>
     </div>
@@ -652,7 +670,7 @@
     </div>
   </footer>
 
-  <script src="assets/js/main.js?v=4" defer></script>
+  <script src="assets/js/main.js?v=5" defer></script>
   <script src="https://app.johncrm.com/widget/chat.js" data-site-key="wc_ffde13edd939bd2c5ea9fb2a" async></script>
 </body>
 </html>

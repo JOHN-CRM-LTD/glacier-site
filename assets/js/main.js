@@ -369,4 +369,56 @@
     window.addEventListener("resize", movePill);
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(movePill);
   })();
+
+  /* ---------- "Ask about coaching": open JohnCRM chat + auto-send ---------- */
+  (function askCoaching() {
+    var btn = document.getElementById("askCoaching");
+    if (!btn) return;
+
+    var message = btn.getAttribute("data-chat-message") ||
+      "Hi! I'd like to ask about skating lessons and coaching.";
+
+    /* The widget builds its UI only after its config fetch resolves, so poll
+       briefly for the launcher, composer and send button to appear. */
+    function widget(attempt, done) {
+      var host = document.querySelector("[data-johncrm-chat]");
+      var root = (host && (host.shadowRoot || host)) || null;
+      var parts = root && {
+        bubble: root.querySelector(".bubble"),
+        input: root.querySelector(".compose textarea"),
+        send: root.querySelector(".compose .send")
+      };
+      if (parts && parts.bubble && parts.input && parts.send) return done(parts);
+      if (attempt <= 0) return done(null);
+      setTimeout(function () { widget(attempt - 1, done); }, 150);
+    }
+
+    btn.addEventListener("click", function () {
+      if (btn.dataset.busy) return;
+      btn.dataset.busy = "1";
+
+      widget(24, function (parts) {
+        /* widget blocked or still loading — fall back to email */
+        if (!parts) {
+          delete btn.dataset.busy;
+          window.location.href =
+            "mailto:info@hkboss.com.hk?subject=" +
+            encodeURIComponent("Skating lessons and coaching");
+          return;
+        }
+
+        if (parts.bubble.getAttribute("aria-expanded") !== "true") parts.bubble.click();
+
+        /* let the panel's entrance animation finish before typing */
+        setTimeout(function () {
+          parts.input.value = message;
+          parts.input.dispatchEvent(new Event("input", { bubbles: true }));
+          setTimeout(function () {
+            if (!parts.send.disabled) parts.send.click();
+            setTimeout(function () { delete btn.dataset.busy; }, 500);
+          }, 60);
+        }, 320);
+      });
+    });
+  })();
 })();
