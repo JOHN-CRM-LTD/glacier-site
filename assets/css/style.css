@@ -1112,12 +1112,15 @@ body.is-loaded .hero__scroll { transform: translateX(-50%); }
   color: var(--ink-600);
   font-size: 0.92rem;
   opacity: 0;
-  transform: translateY(6px);
   visibility: hidden;
-  transition: opacity 0.4s var(--ease-out), transform 0.4s var(--ease-out), visibility 0.4s;
+  transition: none;
 }
 
-.lessons__note.is-active { opacity: 1; transform: none; visibility: visible; }
+.lessons__note.is-active {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.28s var(--ease-out), visibility 0.28s;
+}
 
 /* ---------- lessons: table ---------- */
 .lesson-card {
@@ -1135,12 +1138,17 @@ body.is-loaded .hero__scroll { transform: translateX(-50%); }
   grid-area: 1 / 1;
   min-width: 0; /* let the grid item shrink so the inner table scroller engages */
   opacity: 0;
-  transform: translateY(10px);
   visibility: hidden;
-  transition: opacity 0.45s var(--ease-out), transform 0.45s var(--ease-out), visibility 0.45s;
+  /* switching away is instant, so the two tables never ghost over
+     each other — only the incoming panel fades in */
+  transition: none;
 }
 
-.lesson-panel.is-active { opacity: 1; transform: none; visibility: visible; }
+.lesson-panel.is-active {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.28s var(--ease-out), visibility 0.28s;
+}
 
 .lesson-scroll {
   overflow-x: auto;
