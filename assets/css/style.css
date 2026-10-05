@@ -1228,63 +1228,6 @@ body.is-loaded .hero__scroll { transform: translateX(-50%); }
   margin-top: 1.7rem;
 }
 
-/* ---------- cta band ---------- */
-.cta {
-  position: relative;
-  overflow: hidden;
-  padding-block: clamp(5rem, 10vw, 8.5rem);
-  text-align: center;
-}
-
-.cta__bg, .cta__bg img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.cta__bg img { object-fit: cover; }
-
-.cta__bg::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(6, 13, 23, 0.72);
-}
-
-.cta__inner {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.1rem;
-}
-
-.cta__flake {
-  width: 40px;
-  height: 40px;
-  color: var(--cyan-400);
-  animation: spin 16s linear infinite;
-  margin-bottom: 0.4rem;
-}
-
-.cta__title {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(2.2rem, 5.5vw, 4rem);
-  letter-spacing: -0.02em;
-  color: var(--white);
-  line-height: 1.05;
-}
-
-.cta__inner p {
-  color: var(--text-muted);
-  max-width: 26em;
-}
-
-.cta__inner .btn { margin-top: 1.2rem; }
-
 /* ---------- visit ---------- */
 .visit {
   background: var(--navy-950);
