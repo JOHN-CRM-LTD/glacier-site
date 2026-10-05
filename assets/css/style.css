@@ -896,7 +896,7 @@ body.is-loaded .hero__scroll { transform: translateX(-50%); }
 
 .prices__grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.4rem;
   align-items: stretch;
 }
@@ -1003,6 +1003,224 @@ body.is-loaded .hero__scroll { transform: translateX(-50%); }
 .price--hot .price__feats li::before { background: var(--white); }
 
 .price--hot .price__tag { background: var(--ink-900); }
+
+/* ---------- prices: groups & footnote ---------- */
+.prices__group {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.8rem 2rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.7rem;
+}
+
+.prices__group--gap { margin-top: clamp(3.8rem, 7vw, 5.5rem); }
+
+.prices__group h3 {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-family: var(--font-display);
+  font-size: 1.02rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-900);
+}
+
+.prices__group h3::before {
+  content: "";
+  width: 20px;
+  height: 2px;
+  background: var(--cyan-500);
+}
+
+.prices__group p { color: var(--ink-600); font-size: 0.92rem; }
+
+.prices__footnote {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-top: 1.7rem;
+  color: var(--ink-600);
+  font-size: 0.92rem;
+}
+
+.prices__footnote .flake {
+  width: 16px;
+  height: 16px;
+  color: var(--cyan-600);
+  flex-shrink: 0;
+}
+
+/* ---------- lessons: weekday / weekend toggle ---------- */
+.lessons__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.2rem 2rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.seg {
+  position: relative;
+  display: inline-flex;
+  padding: 4px;
+  background: var(--ice-100);
+  border-radius: 999px;
+}
+
+.seg__pill {
+  position: absolute;
+  top: 4px;
+  left: 0;
+  height: calc(100% - 8px);
+  background: var(--ink-900);
+  border-radius: 999px;
+  opacity: 0;
+  transition: transform 0.38s var(--ease-out), width 0.38s var(--ease-out), opacity 0.25s;
+}
+
+.seg--ready .seg__pill { opacity: 1; }
+
+.seg__btn {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-display);
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--ink-600);
+  background: none;
+  border: 0;
+  padding: 0.62rem 1.5rem;
+  border-radius: 999px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.3s;
+}
+
+.seg__btn:not(.is-active):hover { color: var(--ink-900); }
+.seg__btn.is-active { color: var(--white); }
+.seg:not(.seg--ready) .seg__btn.is-active { color: var(--ink-900); }
+
+.lessons__notes { display: grid; max-width: 30em; }
+
+.lessons__note {
+  grid-area: 1 / 1;
+  color: var(--ink-600);
+  font-size: 0.92rem;
+  opacity: 0;
+  transform: translateY(6px);
+  visibility: hidden;
+  transition: opacity 0.4s var(--ease-out), transform 0.4s var(--ease-out), visibility 0.4s;
+}
+
+.lessons__note.is-active { opacity: 1; transform: none; visibility: visible; }
+
+/* ---------- lessons: table ---------- */
+.lesson-card {
+  display: grid;
+  background: var(--white);
+  border: 1.5px solid var(--ice-100);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: border-color 0.3s;
+}
+
+.lesson-card:hover { border-color: rgba(0, 144, 180, 0.45); }
+
+.lesson-panel {
+  grid-area: 1 / 1;
+  min-width: 0; /* let the grid item shrink so the inner table scroller engages */
+  opacity: 0;
+  transform: translateY(10px);
+  visibility: hidden;
+  transition: opacity 0.45s var(--ease-out), transform 0.45s var(--ease-out), visibility 0.45s;
+}
+
+.lesson-panel.is-active { opacity: 1; transform: none; visibility: visible; }
+
+.lesson-scroll {
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--ice-100) var(--white);
+  -webkit-overflow-scrolling: touch;
+}
+
+.lesson-scroll::-webkit-scrollbar { height: 8px; }
+.lesson-scroll::-webkit-scrollbar-track { background: var(--ice-50); }
+.lesson-scroll::-webkit-scrollbar-thumb { background: var(--ice-100); border-radius: 99px; }
+.lesson-scroll::-webkit-scrollbar-thumb:hover { background: var(--cyan-400); }
+
+.lesson-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.lesson-table thead th {
+  font-family: var(--font-display);
+  font-size: 0.74rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink-600);
+  text-align: right;
+  padding: 0.95rem 1.1rem 0.8rem 0.6rem;
+  background: var(--ice-50);
+  border-bottom: 1.5px solid var(--ice-100);
+  white-space: nowrap;
+}
+
+.lesson-table thead th:first-child { text-align: left; padding-left: 1.7rem; }
+
+.lesson-table tbody th {
+  font-family: var(--font-display);
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: var(--ink-900);
+  text-align: left;
+  padding: 1.02rem 1.1rem 1.02rem 1.7rem;
+  border-bottom: 1px solid var(--ice-100);
+  white-space: nowrap;
+}
+
+.lesson-table tbody th span {
+  display: block;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 0.78rem;
+  color: var(--ink-600);
+}
+
+.lesson-table td {
+  padding: 1.02rem 1.1rem 1.02rem 0.6rem;
+  text-align: right;
+  color: var(--ink-900);
+  font-size: 0.95rem;
+  font-variant-numeric: tabular-nums;
+  border-bottom: 1px solid var(--ice-100);
+  white-space: nowrap;
+}
+
+.lesson-table td small { color: var(--ink-600); font-size: 0.85rem; }
+.lesson-table td.students { color: var(--ink-600); font-size: 0.88rem; }
+
+.lesson-table tbody tr { transition: background 0.25s; }
+.lesson-table tbody tr:hover { background: rgba(0, 144, 180, 0.05); }
+.lesson-table tbody tr:last-child td,
+.lesson-table tbody tr:last-child th { border-bottom: 0; }
+
+.lessons__cta {
+  display: flex;
+  align-items: center;
+  gap: 1.8rem;
+  flex-wrap: wrap;
+  margin-top: 1.7rem;
+}
+
+.prices .link-arrow { color: var(--cyan-600); }
 
 /* ---------- cta band ---------- */
 .cta {
@@ -1276,45 +1494,6 @@ body.is-loaded .hero__scroll { transform: translateX(-50%); }
   transform: translate(0, 0);
 }
 
-/* ---------- custom cursor ---------- */
-.cursor-dot, .cursor-ring {
-  position: fixed;
-  top: 0;
-  left: 0;
-  pointer-events: none;
-  z-index: 999;
-  border-radius: 50%;
-  opacity: 0;
-}
-
-body.cursor-on .cursor-dot,
-body.cursor-on .cursor-ring { opacity: 1; }
-
-.cursor-dot {
-  width: 7px;
-  height: 7px;
-  background: var(--cyan-400);
-  transform: translate(-50%, -50%);
-}
-
-.cursor-ring {
-  width: 38px;
-  height: 38px;
-  border: 1.5px solid rgba(255, 255, 255, 0.85);
-  mix-blend-mode: difference;
-  transform: translate(-50%, -50%);
-  transition: width 0.25s var(--ease-out), height 0.25s var(--ease-out), opacity 0.25s;
-}
-
-body.cursor-hover .cursor-ring {
-  width: 62px;
-  height: 62px;
-}
-
-/* hide native cursor when custom cursor is active (not on form controls) */
-body.cursor-on *:not(input):not(textarea):not(select):not(option) { cursor: none; }
-body.cursor-on input, body.cursor-on textarea, body.cursor-on select { cursor: auto; }
-
 /* ---------- responsive ---------- */
 @media (max-width: 1024px) {
   .nav__links { display: none; }
@@ -1360,6 +1539,13 @@ body.cursor-on input, body.cursor-on textarea, body.cursor-on select { cursor: a
   .prices__grid { grid-template-columns: 1fr; }
   .price--hot { grid-column: span 1; }
 
+  .prices__group { flex-direction: column; gap: 0.3rem; }
+  .lessons__bar { flex-direction: column; align-items: stretch; gap: 1rem; }
+  .seg { display: flex; }
+  .seg__btn { flex: 1; text-align: center; }
+  .lessons__notes { max-width: none; }
+  .lessons__cta { flex-direction: column; align-items: flex-start; gap: 1.1rem; }
+
   .rink__media { min-height: 380px; }
   .rink__img--main { height: 340px; width: 72%; }
   .rink__img--float { height: 175px; width: 48%; }
@@ -1378,7 +1564,7 @@ body.cursor-on input, body.cursor-on textarea, body.cursor-on select { cursor: a
     transition-duration: 0.01ms !important;
   }
 
-  .hero__snow, .cursor-dot, .cursor-ring { display: none; }
+  .hero__snow { display: none; }
 
   [data-reveal], .hero__eyebrow, .hero__copy, .hero__actions, .hero__scroll,
   .hero__title .line__inner {

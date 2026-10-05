@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css?v=5">
+  <link rel="stylesheet" href="assets/css/style.css?v=7">
 </head>
 <body id="top">
 
@@ -214,8 +214,8 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#flake"/></svg>
           </div>
           <h3 class="card__title">Learn to skate</h3>
-          <p class="card__text">Structured six-week courses with qualified coaches, from first steps to confident gliding.</p>
-          <p class="card__meta">From age 4 &middot; 6-week blocks</p>
+          <p class="card__text">Private, semi-private and group lessons with qualified coaches &mdash; from first steps to confident gliding.</p>
+          <p class="card__meta">Every day &middot; from $260 / lesson</p>
         </article>
 
         <article class="card" data-reveal style="--d:.16s" data-tilt>
@@ -312,63 +312,199 @@
           <h2 class="h2" data-reveal style="--d:.08s">Simple, honest pricing</h2>
         </div>
         <p class="section-head__side" data-reveal style="--d:.16s">
-          Every ticket includes skate hire and a two-hour session.
-          No booking fees, ever.
+          All prices in HKD. A small admission gets you skates and the ice &mdash;
+          then you only pay for the minutes you glide. No booking fees, ever.
         </p>
+      </div>
+
+      <div class="prices__group" data-reveal>
+        <h3>Public skating</h3>
+        <p>Walk in any day &mdash; no booking needed</p>
       </div>
 
       <div class="prices__grid">
         <article class="price" data-reveal data-tilt>
-          <h3 class="price__name">Off-peak</h3>
-          <p class="price__when">Weekdays before 4pm</p>
-          <p class="price__amount">&pound;8.50<span> / person</span></p>
+          <h3 class="price__name">Admission</h3>
+          <p class="price__when">Every day, every session</p>
+          <p class="price__amount">HK$20<span> / person</span></p>
           <ul class="price__feats">
-            <li>Two-hour public session</li>
-            <li>Skate hire included</li>
-            <li>Free locker</li>
+            <li>One pair of skates included</li>
+            <li>In and out within 30 minutes? No charge</li>
+            <li>Pay at the desk or with Octopus</li>
           </ul>
           <a class="btn btn--dark" href="https://hkboss.com.hk/ai-cs.html">Get tickets</a>
         </article>
 
         <article class="price" data-reveal style="--d:.08s" data-tilt>
-          <h3 class="price__name">Standard</h3>
-          <p class="price__when">Evenings &amp; weekends</p>
-          <p class="price__amount">&pound;12<span> / person</span></p>
+          <h3 class="price__name">Mon &ndash; Wed</h3>
+          <p class="price__when">Monday to Wednesday</p>
+          <p class="price__amount">HK$1.2<span> / min</span></p>
           <ul class="price__feats">
-            <li>Two-hour public session</li>
-            <li>Skate hire included</li>
-            <li>Free locker</li>
-            <li>Priority entry queue</li>
+            <li>Ice time billed by the minute</li>
+            <li>Charged by Octopus after you step on</li>
+            <li>Skate as long as you like</li>
           </ul>
           <a class="btn btn--dark" href="https://hkboss.com.hk/ai-cs.html">Get tickets</a>
         </article>
 
         <article class="price price--hot" data-reveal style="--d:.16s" data-tilt>
-          <p class="price__tag">Most popular</p>
-          <h3 class="price__name">Family</h3>
-          <p class="price__when">2 adults + 2 children</p>
-          <p class="price__amount">&pound;34<span> / family</span></p>
+          <p class="price__tag">Peak times</p>
+          <h3 class="price__name">Thu &ndash; Sun &amp; PH</h3>
+          <p class="price__when">Thursday to Sunday &amp; public holidays</p>
+          <p class="price__amount">HK$1.7<span> / min</span></p>
           <ul class="price__feats">
-            <li>Two-hour public session</li>
-            <li>Skate hire for all four</li>
-            <li>Hot chocolate each</li>
-            <li>Save &pound;7 on individual tickets</li>
+            <li>Ice time billed by the minute</li>
+            <li>Charged by Octopus after you step on</li>
+            <li>Disco lights on weekend nights</li>
           </ul>
           <a class="btn btn--white" href="https://hkboss.com.hk/ai-cs.html">Get tickets</a>
         </article>
+      </div>
 
-        <article class="price" data-reveal style="--d:.24s" data-tilt>
-          <h3 class="price__name">Season pass</h3>
-          <p class="price__when">Unlimited skating</p>
-          <p class="price__amount">&pound;145<span> / year</span></p>
-          <ul class="price__feats">
-            <li>All public sessions, 12 months</li>
-            <li>10% off courses &amp; events</li>
-            <li>Four guest passes</li>
-            <li>Members-only skate nights</li>
-          </ul>
-          <a class="btn btn--dark" href="https://hkboss.com.hk/ai-cs.html">Become a member</a>
-        </article>
+      <p class="prices__footnote" data-reveal style="--d:.24s">
+        <svg class="flake" aria-hidden="true"><use href="#flake"/></svg>
+        All prices in HKD. Ice time is charged by the minute to your Octopus after you step on the ice.
+      </p>
+
+      <div class="prices__group prices__group--gap" id="lessons" data-reveal>
+        <h3>Lessons &amp; courses</h3>
+        <p>Qualified coaches &middot; book five and save</p>
+      </div>
+
+      <div class="lessons" data-reveal style="--d:.08s">
+        <div class="lessons__bar">
+          <div class="seg" role="group" aria-label="Choose lesson days">
+            <span class="seg__pill" aria-hidden="true"></span>
+            <button class="seg__btn is-active" type="button" data-tab="weekday" aria-pressed="true" aria-controls="panel-weekday">Weekdays</button>
+            <button class="seg__btn" type="button" data-tab="weekend" aria-pressed="false" aria-controls="panel-weekend">Weekends &amp; PH</button>
+          </div>
+          <div class="lessons__notes">
+            <p class="lessons__note is-active" data-note="weekday">30-minute sessions, Monday to Friday. The higher figure is the senior-coach rate.</p>
+            <p class="lessons__note" data-note="weekend">30-minute sessions on Saturdays, Sundays and public holidays. The higher figure is the senior-coach rate.</p>
+          </div>
+        </div>
+
+        <div class="lesson-card">
+          <div class="lesson-panel is-active" id="panel-weekday" data-panel="weekday">
+            <div class="lesson-scroll">
+              <table class="lesson-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Course &middot; 30 min</th>
+                    <th scope="col">1 lesson</th>
+                    <th scope="col">2 lessons</th>
+                    <th scope="col">3 lessons</th>
+                    <th scope="col">4 lessons</th>
+                    <th scope="col">5 lessons</th>
+                    <th scope="col">Students</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">Private</th>
+                    <td>$460 <small>/ $540</small></td>
+                    <td>$800 <small>/ $1,020</small></td>
+                    <td>$1,210 <small>/ $1,430</small></td>
+                    <td>$1,500 <small>/ $1,800</small></td>
+                    <td>$1,730 <small>/ $2,090</small></td>
+                    <td class="students">1</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Semi-private</th>
+                    <td>$360 <small>/ $420</small></td>
+                    <td>$670 <small>/ $780</small></td>
+                    <td>$920 <small>/ $1,090</small></td>
+                    <td>$1,100 <small>/ $1,330</small></td>
+                    <td>$1,280 <small>/ $1,530</small></td>
+                    <td class="students">2&ndash;3</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Group</th>
+                    <td>$260</td>
+                    <td>$520</td>
+                    <td>$670</td>
+                    <td>$750</td>
+                    <td>$820</td>
+                    <td class="students">4&ndash;7</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Stroking <span>before 10am</span></th>
+                    <td>$340</td>
+                    <td>$630</td>
+                    <td>$860</td>
+                    <td>$1,040</td>
+                    <td>$1,180</td>
+                    <td class="students">20+</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="lesson-panel" id="panel-weekend" data-panel="weekend">
+            <div class="lesson-scroll">
+              <table class="lesson-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Course &middot; 30 min</th>
+                    <th scope="col">1 lesson</th>
+                    <th scope="col">2 lessons</th>
+                    <th scope="col">3 lessons</th>
+                    <th scope="col">4 lessons</th>
+                    <th scope="col">5 lessons</th>
+                    <th scope="col">Students</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">Private</th>
+                    <td>$510 <small>/ $600</small></td>
+                    <td>$950 <small>/ $1,120</small></td>
+                    <td>$1,340 <small>/ $1,590</small></td>
+                    <td>$1,670 <small>/ $2,000</small></td>
+                    <td>$1,940 <small>/ $2,350</small></td>
+                    <td class="students">1</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Semi-private</th>
+                    <td>$410 <small>/ $480</small></td>
+                    <td>$760 <small>/ $910</small></td>
+                    <td>$1,050 <small>/ $1,270</small></td>
+                    <td>$1,290 <small>/ $1,580</small></td>
+                    <td>$1,480 <small>/ $1,840</small></td>
+                    <td class="students">2&ndash;3</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Group</th>
+                    <td>$310</td>
+                    <td>$610</td>
+                    <td>$800</td>
+                    <td>$920</td>
+                    <td>$1,020</td>
+                    <td class="students">4&ndash;7</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Stroking <span>before 10am</span></th>
+                    <td>$380</td>
+                    <td>$690</td>
+                    <td>$950</td>
+                    <td>$1,160</td>
+                    <td>$1,330</td>
+                    <td class="students">20+</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="lessons__cta">
+          <a class="btn btn--dark" href="https://hkboss.com.hk/ai-cs.html">Book a course</a>
+          <a class="link-arrow link-arrow--sm" href="mailto:info@hkboss.com.hk">
+            Ask about coaching
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+        </div>
       </div>
     </div>
   </section>
@@ -451,8 +587,9 @@
             Good to know
           </h3>
           <ul class="tips">
+            <li>Ice time is billed by the minute &mdash; tap your Octopus as you step on</li>
             <li>Wear warm layers &amp; thick socks</li>
-            <li>Gloves are compulsory on the ice &mdash; &pound;2 at reception if you forget</li>
+            <li>Gloves are compulsory on the ice &mdash; grab a pair at reception if you forget</li>
             <li>Under-8s need an adult on the ice with them</li>
             <li>Free lockers &mdash; bring a padlock or grab one at the desk</li>
           </ul>
@@ -496,7 +633,7 @@
         <h4>Information</h4>
         <a href="#visit">Opening hours</a>
         <a href="#visit">Find us</a>
-        <a href="#sessions">Learn to skate</a>
+        <a href="#lessons">Learn to skate</a>
         <a href="#sessions">Parties &amp; events</a>
         <a href="mailto:info@hkboss.com.hk">Contact us</a>
       </nav>
@@ -515,7 +652,7 @@
     </div>
   </footer>
 
-  <script src="assets/js/main.js?v=2" defer></script>
+  <script src="assets/js/main.js?v=4" defer></script>
   <script src="https://app.johncrm.com/widget/chat.js" data-site-key="wc_ffde13edd939bd2c5ea9fb2a" async></script>
 </body>
 </html>

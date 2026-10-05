@@ -1,6 +1,6 @@
 /* ==========================================================================
    GLACIER SKATING — main.js
-   Snow, reveals, counters, tilt, cursor, parallax, open-status.
+   Snow, reveals, counters, tilt, parallax, open-status.
    ========================================================================== */
 (function () {
   "use strict";
@@ -325,49 +325,48 @@
     });
   })();
 
-  /* ---------- custom cursor ---------- */
-  (function cursor() {
-    if (prefersReduced || !isFinePointer) return;
+  /* ---------- lessons: weekday / weekend pricing toggle ---------- */
+  (function lessonToggle() {
+    var seg = document.querySelector(".seg");
+    if (!seg) return;
 
-    var dot = document.createElement("div");
-    var ring = document.createElement("div");
-    dot.className = "cursor-dot";
-    ring.className = "cursor-ring";
-    document.body.appendChild(dot);
-    document.body.appendChild(ring);
-    document.body.classList.add("cursor-on");
+    var pill = seg.querySelector(".seg__pill");
+    var btns = Array.prototype.slice.call(seg.querySelectorAll(".seg__btn"));
 
-    var mx = -100, my = -100, rx = -100, ry = -100;
-    var shown = false;
+    /* size the thumb from the live button so any label width works */
+    function movePill() {
+      var active = seg.querySelector(".seg__btn.is-active") || btns[0];
+      pill.style.width = active.offsetWidth + "px";
+      pill.style.transform = "translateX(" + active.offsetLeft + "px)";
+    }
 
-    document.addEventListener("mousemove", function (e) {
-      mx = e.clientX;
-      my = e.clientY;
-      if (!shown) { shown = true; rx = mx; ry = my; }
-      dot.style.transform = "translate(" + (mx - 3.5) + "px," + (my - 3.5) + "px)";
+    btns.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        if (btn.classList.contains("is-active")) return;
+        var target = btn.getAttribute("data-tab");
+
+        btns.forEach(function (b) {
+          var on = b === btn;
+          b.classList.toggle("is-active", on);
+          b.setAttribute("aria-pressed", String(on));
+        });
+        movePill();
+
+        document.querySelectorAll(".lesson-panel").forEach(function (p) {
+          var on = p.getAttribute("data-panel") === target;
+          p.classList.toggle("is-active", on);
+          p.setAttribute("aria-hidden", String(!on));
+        });
+
+        document.querySelectorAll(".lessons__note").forEach(function (n) {
+          n.classList.toggle("is-active", n.getAttribute("data-note") === target);
+        });
+      });
     });
 
-    document.addEventListener("mouseleave", function () {
-      dot.style.opacity = "0";
-      ring.style.opacity = "0";
-    });
-    document.addEventListener("mouseenter", function () {
-      dot.style.opacity = "";
-      ring.style.opacity = "";
-    });
-
-    /* grow over interactive elements */
-    document.addEventListener("mouseover", function (e) {
-      var interactive = e.target.closest("a, button, [data-tilt], .g-item, input, select");
-      document.body.classList.toggle("cursor-hover", !!interactive);
-    });
-
-    (function loop() {
-      rx += (mx - rx) * 0.16;
-      ry += (my - ry) * 0.16;
-      var size = document.body.classList.contains("cursor-hover") ? 62 : 38;
-      ring.style.transform = "translate(" + (rx - size / 2) + "px," + (ry - size / 2) + "px)";
-      requestAnimationFrame(loop);
-    })();
+    movePill();
+    seg.classList.add("seg--ready");
+    window.addEventListener("resize", movePill);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(movePill);
   })();
 })();
